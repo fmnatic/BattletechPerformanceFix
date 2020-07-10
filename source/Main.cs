@@ -14,6 +14,7 @@ using HBS.Logging;
 using BattleTech;
 using BattleTech.Framework;
 using static BattletechPerformanceFix.Extensions;
+using BestHTTP.ServerSentEvents;
 
 namespace BattletechPerformanceFix
 {
@@ -65,7 +66,7 @@ namespace BattletechPerformanceFix
                     return;
                 }
 
-                var WantVersions = new string[] { "1.8" };
+                var WantVersions = new string[] { "1.9" };
                 if (WantVersions.Where(v => VersionInfo.ProductVersion.Trim().StartsWith(v)).Any())
                 {
                     LogInfo(string.Format("BattletechPerformanceFix found BattleTech {0} and will now load", VersionInfo.ProductVersion));
@@ -96,6 +97,7 @@ namespace BattletechPerformanceFix
                     { typeof(RemovedFlashpointFix), true },
                     { typeof(DisableSimAnimations), false },
                     { typeof(RemovedContractsFix), true },
+                    { typeof(MessageCenterFix), true },
                 };
                                
                 Dictionary<Type, bool> want = allFeatures.ToDictionary(f => f.Key, f => settings.features.TryGetValue(f.Key.Name, out var userBool) ? userBool : f.Value);
