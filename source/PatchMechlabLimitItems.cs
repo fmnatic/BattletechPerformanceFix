@@ -384,6 +384,7 @@ namespace BattletechPerformanceFix
             var iw = new Traverse(inventoryWidget);
             Func<string,bool> f = (n) => iw.Field(n).GetValue<bool>();
             var filter = new InventoryFilter( false //this.filteringAll
+                                            , f("filteringAmmo")
                                             , f("filteringWeapons")
                                             , f("filterEnabledWeaponBallistic")
                                             , f("filterEnabledWeaponEnergy")
